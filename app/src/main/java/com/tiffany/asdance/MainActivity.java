@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
+import com.tiffany.asdance.course.CourseItemOnClickListener;
 import com.tiffany.asdance.course.CourseRecycleAdapter;
 import com.tiffany.asdance.course.DividerGridItemDecoration;
 import com.tiffany.asdance.course.RecyclerViewGridAdapter;
@@ -13,9 +17,9 @@ import com.tiffany.asdance.course.RecyclerViewGridAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CourseItemOnClickListener {
 
-    private List<String> list ;
+
     private RecyclerView recy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData() {//虚拟数据
 
-//        data datas=null;
-        this.list = new ArrayList<>();
 
-        for (int i = 0; i <= 10; i++) {
-
-//            datas=newdata();
-//
-//            datas.setId(i);
-
-            list.add("item");
-
-        }
 
     }
         private void initData() {
@@ -61,9 +54,16 @@ public class MainActivity extends AppCompatActivity {
 
             recy.setLayoutManager(ms);  //给RecyClerView 添加设置好的布局样式
 
-            CourseRecycleAdapter oap=new CourseRecycleAdapter(new String[]{"item1","item2","item3","item4","item5","item6","item7","item8","item9","item4","item5","item6"});  //初始化适配器
+            CourseRecycleAdapter adapter=new CourseRecycleAdapter(new String[]{"item1", "item2", "item3",
+                                                                                "item4", "item5", "item6",
+                                            "item7", "item8", "item9", "item4", "item5", "item6"});
 
-            recy.setAdapter(oap);  // 对 recyclerview 添加数据内容
+             //初始化适配器
+            adapter.setItemOnClickListener(this);
+
+            recy.setAdapter(adapter);  // 对 recyclerview 添加数据内容
+
+
 
 
 
@@ -87,4 +87,10 @@ public class MainActivity extends AppCompatActivity {
 //            recy.setAdapter(mAdapter);
 
         }
+
+
+    @Override
+    public void onCourseItemOnClick(View view, int postion) {
+        Log.e("onitemClick",""+postion);
+    }
 }
