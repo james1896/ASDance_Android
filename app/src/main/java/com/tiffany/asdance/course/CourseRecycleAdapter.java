@@ -1,5 +1,6 @@
 package com.tiffany.asdance.course;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import com.tiffany.asdance.R;
 public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdapter.ViewHolder> {
 
     public String[] datas = null;
+    private ViewHolder lastViewHolder;
    private CourseItemOnClickListener mMyItemOnClickListener;
 
     public CourseRecycleAdapter(String[] datas) {
@@ -36,6 +38,10 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
+
+
+
+
         viewHolder.mTextView.setText(datas[position]);
 //        viewHolder.position = position;
     }
@@ -54,16 +60,21 @@ public class CourseRecycleAdapter extends RecyclerView.Adapter<CourseRecycleAdap
 
         public TextView mTextView;
 //        public int position;
-
+        public View currentView;
         CourseItemOnClickListener mListener;
+
 
         public ViewHolder(View view,CourseItemOnClickListener listener){
             super(view);
+            this.currentView = view;
             mListener = listener;
             mTextView = (TextView) view.findViewById(R.id.adapter_wuliu_grid_title);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                view.setBackgroundColor(Color.RED);
+
                 mListener.onCourseItemOnClick(view,getPosition());
 //                Log.e("onClick", String.valueOf(mListener));
             }

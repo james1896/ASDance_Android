@@ -1,5 +1,6 @@
 package com.tiffany.asdance;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,13 +22,11 @@ public class MainActivity extends AppCompatActivity implements CourseItemOnClick
 
 
     private RecyclerView recy;
+    private View lastItemView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
 
         getData();  //获取 RecyClerView 适配器 需要的数据
 
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements CourseItemOnClick
 
             CourseRecycleAdapter adapter=new CourseRecycleAdapter(new String[]{"item1", "item2", "item3",
                                                                                 "item4", "item5", "item6",
-                                            "item7", "item8", "item9", "item4", "item5", "item6"});
+                                            "item7", "item8", "item9", "item10", "item11", "item12"});
 
              //初始化适配器
             adapter.setItemOnClickListener(this);
@@ -92,5 +91,11 @@ public class MainActivity extends AppCompatActivity implements CourseItemOnClick
     @Override
     public void onCourseItemOnClick(View view, int postion) {
         Log.e("onitemClick",""+postion);
+
+        view.setBackgroundColor(Color.RED);
+        if(this.lastItemView != null){
+            this.lastItemView.setBackgroundColor(getResources().getColor(R.color.courseGroundColorBlack));
+        }
+        this.lastItemView = view;
     }
 }
